@@ -7,6 +7,7 @@ using TMPro;
 public class PlayerController : MonoBehaviour
 {
     public float speed = 0;
+    public float jumpForce = 0;
     public TextMeshProUGUI countText;
     public GameObject winTextObject;
 
@@ -14,11 +15,14 @@ public class PlayerController : MonoBehaviour
     private float movementX;
     private float movementZ;
     private int count;
+    private Keyboard keyboard;
 
     void Start()
     {
         count = 0;
         rb = GetComponent<Rigidbody>();
+        rb.maxAngularVelocity = 20.0f;
+        keyboard = Keyboard.current;
         winTextObject.SetActive(false);
     }
 
@@ -28,6 +32,11 @@ public class PlayerController : MonoBehaviour
         movementX = movementVector.x;
         movementZ = movementVector.y;
     }
+
+    /*void OnJump(InputValue inputValue)
+    {
+        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+    }*/
 
     void SetCountText()
     {
@@ -40,17 +49,28 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector3 movement = new Vector3(movementX, 0.0f, movementZ);
-        rb.AddForce(movement * speed);
+        Vector3 movement = new Vector3(movementZ, 0, -movementX);
+        rb.AddTorque(movement * speed);
     }
 
     private void OnTriggerEnter(Collider other)
     {
+
         if (other.gameObject.CompareTag("Pickup"))
         {
             other.gameObject.SetActive(false);
             count++;
             SetCountText();
+        }
+    }
+
+    void OnCollisionStay(Collision collisionInfo)
+    {
+        Vector3 collisionPoint = collisionInfo.GetContact(0).point;
+        Vector3 collisionOffset = collisionPoint - transform.position;
+        //if(keyboard.spaceKey.wasPressedThisFrame)
+        {
+            rb.AddForce(collisionOffset.normalized * jumpForce, ForceMode.Force);
         }
     }
 }
