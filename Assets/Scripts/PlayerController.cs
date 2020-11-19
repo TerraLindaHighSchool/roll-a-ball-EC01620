@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
     private float movementZ;
     private int count;
     private Keyboard keyboard;
+    private bool onGround;
+    private Vector3 collisionPoint;
 
     void Start()
     {
@@ -33,10 +35,14 @@ public class PlayerController : MonoBehaviour
         movementZ = movementVector.y;
     }
 
-    /*void OnJump(InputValue inputValue)
+    void OnJump(InputValue inputValue)
     {
-        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-    }*/
+        Vector3 collisionOffset = transform.position - collisionPoint;
+        if (onGround)
+        {
+            rb.AddForce(collisionOffset.normalized * jumpForce, ForceMode.Impulse);
+        }
+    }
 
     void SetCountText()
     {
@@ -62,15 +68,26 @@ public class PlayerController : MonoBehaviour
             count++;
             SetCountText();
         }
+
+        if (other.gameObject.CompareTag("Speed"))
+        {
+            rb.AddForce(rb.velocity * 1.5f, ForceMode.Impulse);
+        }
+
+        if (other.gameObject.CompareTag("Jump"))
+        {
+            rb.AddForce(other.gameObject.transform.up * jumpForce * 2, ForceMode.Impulse);
+        }
     }
 
     void OnCollisionStay(Collision collisionInfo)
     {
-        Vector3 collisionPoint = collisionInfo.GetContact(0).point;
-        Vector3 collisionOffset = collisionPoint - transform.position;
-        //if(keyboard.spaceKey.wasPressedThisFrame)
-        {
-            rb.AddForce(collisionOffset.normalized * jumpForce, ForceMode.Force);
-        }
+        onGround = true;
+        collisionPoint = collisionInfo.GetContact(0).point;
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        onGround = false;
     }
 }
