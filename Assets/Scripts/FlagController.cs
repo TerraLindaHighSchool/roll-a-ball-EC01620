@@ -28,7 +28,7 @@ public class FlagController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            rb.MovePosition(moveTarget);
+            rb.MovePosition(originalPosition);
         }
     }
 }

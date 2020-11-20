@@ -8,6 +8,7 @@ TagManager:
   - Flag
   - Jump
   - Speed
+  - Goal
   layers:
   - Default
   - TransparentFX

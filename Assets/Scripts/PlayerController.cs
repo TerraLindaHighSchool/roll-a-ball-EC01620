@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     public float speed = 0;
     public float jumpForce = 0;
     public TextMeshProUGUI countText;
-    public GameObject winTextObject;
+    
 
     private Rigidbody rb;
     private float movementX;
@@ -25,7 +25,6 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.maxAngularVelocity = 20.0f;
         keyboard = Keyboard.current;
-        winTextObject.SetActive(false);
     }
 
     void OnMove(InputValue movementValue)
@@ -46,11 +45,7 @@ public class PlayerController : MonoBehaviour
 
     void SetCountText()
     {
-        countText.text = "Count: " + count.ToString();
-        if (count >= 8)
-        {
-            winTextObject.SetActive(true);
-        }
+        countText.text = "Points: " + count.ToString();
     }
 
     void FixedUpdate()

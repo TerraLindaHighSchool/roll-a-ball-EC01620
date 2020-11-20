@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 8409311358584156452}
   - component: {fileID: 6657674280998979694}
   - component: {fileID: 7872702665972641018}
-  - component: {fileID: 722211318631686684}
   - component: {fileID: 722211318631686685}
   - component: {fileID: 722211318631686686}
+  - component: {fileID: 7924354734804544292}
   m_Layer: 0
   m_Name: FlagMesh
   m_TagString: Untagged
@@ -84,20 +84,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &722211318631686684
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 722211318631686687}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 2
-  m_Height: 4
-  m_Direction: 1
-  m_Center: {x: 0, y: 2, z: 0}
 --- !u!114 &722211318631686685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,6 +112,19 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &7924354734804544292
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 722211318631686687}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 6, y: 6, z: 6}
+  m_Center: {x: 0, y: 2, z: 0}
 --- !u!1 &8163999335357637365
 GameObject:
   m_ObjectHideFlags: 0
@@ -170,6 +169,7 @@ GameObject:
   - component: {fileID: 8163999336408449694}
   - component: {fileID: 8163999336408449695}
   - component: {fileID: 8163999336408449688}
+  - component: {fileID: 1536308167413589392}
   m_Layer: 0
   m_Name: Hole
   m_TagString: Untagged
@@ -254,3 +254,15 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1536308167413589392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8163999336408449690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a441348695c42448cee818b50d1102, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
